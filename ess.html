@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jolt - Boa Fleece Jacket</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Stripe.js (nécessaire pour les paiements Stripe) -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        /* Style pour les boutons de paiement */
+        .paypal-button {
+            background-color: #0070ba;
+            transition: all 0.3s ease;
+        }
+        .paypal-button:hover {
+            background-color: #003087;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 112, 186, 0.3);
+        }
+        
+        .stripe-button {
+            background-color: #635bff;
+            transition: all 0.3s ease;
+        }
+        .stripe-button:hover {
+            background-color: #4a42e8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 91, 255, 0.3);
+        }
+        
+        .payment-option {
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease;
+        }
+        .payment-option:hover {
+            border-color: #635bff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="flex flex-col min-h-screen">
+        <!-- Bandeau promotionnel -->
+        <div class="bg-black text-white text-center p-2 text-sm">
+            New Season Coming Discount 30% for all products! Check out now.
+        </div>
+
+        <!-- HEADER -->
+        <header class="bg-white shadow-md">
+            <div class="max-w-7xl mx-auto px-5 py-4 flex justify-between items-center">
+                <h1 class="text-3xl font-bold">Jolt</h1>
+                <nav class="space-x-6 hidden md:flex">
+                    <a href="#" class="text-black hover:text-gray-800">Categories</a>
+                    <a href="#" class="text-gray-600 hover:text-black">Collections</a>
+                    <a href="#" class="text-gray-600 hover:text-black">Store</a>
+                    <a href="#" class="text-gray-600 hover:text-black">Blog</a>
+                    <a href="#" class="text-gray-600 hover:text-black">Find Store</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-600 hover:text-black hidden md:inline-flex"><i class="fas fa-search"></i> Search</span>
+                    <span class="text-gray-600 hover:text-black hidden md:inline-flex"><i class="fas fa-shopping-cart"></i> Cart(0)</span>
+                    <span class="text-gray-600 hover:text-black hidden md:inline-flex"><i class="fas fa-sign-in-alt"></i> Login</span>
+                    <button class="md:hidden">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main class="max-w-7xl mx-auto px-4 py-8 flex-grow">
+            <div class="flex flex-wrap lg:flex-nowrap gap-8">
+                <!-- PARTIE GAUCHE - GALERIE D'IMAGES -->
+                <div class="w-full md:w-auto relative">
+                    <div class="flex flex-col md:flex-row">
+                        <!-- Miniatures à gauche -->
+                        <div class="flex flex-row md:flex-col gap-4 mt-4 md:mt-0 md:ml-4 order-2 md:order-1">
+                            <img src="Hoodie Streetwear Oversize imprimé - Orange _ M.jpeg" 
+                                 class="image-detail w-20 h-20 rounded-lg object-cover cursor-pointer border-2 hover:border-blue-500" 
+                                 alt="Hoodie Orange" />
+                            <img src="Sweat Chat à Capuche Love You Love Me - Violet _ 3XL.jpeg" 
+                                 class="image-detail w-20 h-20 rounded-lg object-cover cursor-pointer border-2 hover:border-blue-500" 
+                                 alt="Sweat Violet" />
+                            <img src="5eafeee4-1652-4823-8bc7-73b2a0491ffd.jpeg" 
+                                 class="image-detail w-20 h-20 rounded-lg object-cover cursor-pointer border-2 hover:border-blue-500" 
+                                 alt="Design 1" />
+                            <img src="fall bungou stray dogs Anime print Hoodie student casual basic  Kpop Oversized Streetwear Sudadera.jpeg" 
+                                 class="image-detail w-20 h-20 rounded-lg object-contain cursor-pointer border-2 hover:border-blue-500" 
+                                 alt="Anime Hoodie" />
+                        </div>
+                        <!-- Image principale -->
+                        <div class="flex-shrink-0 order-1 md:order-2">
+                            <img src="Pull No Name réédition - S _ black.jpeg" 
+                                 class="w-96 h-96 rounded-lg object-cover shadow-lg" 
+                                 alt="Boa Fleece Jacket" 
+                                 id="image-principale" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PARTIE DROITE - INFOS PRODUIT -->
+                <div class="flex-1">
+                    <h2 class="text-3xl font-bold">Boa Fleece Jacket</h2>
+                    
+                    <!-- Prix et promo -->
+                    <div class="flex items-center gap-2 mt-2">
+                        <span class="text-gray-500 line-through">$180.00</span>
+                        <span class="text-2xl font-semibold">$122.00</span>
+                        <span class="text-white bg-black px-2 py-1 rounded-lg">5% Disc</span>
+                    </div>
+                    
+                    <!-- Avis -->
+                    <div class="flex items-center gap-1 text-black mt-2">
+                        <span class="text-yellow-400">★★★★☆</span>
+                        <span class="text-gray-600">(4.9) 1.2K Reviews</span>
+                    </div>
+                    
+                    <!-- Description -->
+                    <h3 class="font-semibold mt-4">Description:</h3>
+                    <p class="text-gray-700 mt-2">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, tenetur beatae in quibusdam, maxime temporibus...
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. In ratione vero libero culpa sit doloremque laudantium. dolor cum incidunt quo laborum!
+                    </p>
+                    
+                    <!-- Couleurs disponibles -->
+                    <div class="mt-4">
+                        <h3 class="font-semibold">Available Colors:</h3>
+                        <div class="flex gap-2 mt-2">
+                            <div class="w-8 h-8 bg-black rounded-full border-2 cursor-pointer hover:scale-110 transition"></div>
+                            <div class="w-8 h-8 bg-blue-600 rounded-full border-2 cursor-pointer hover:scale-110 transition"></div>
+                            <div class="w-8 h-8 bg-green-600 rounded-full border-2 cursor-pointer hover:scale-110 transition"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tailles -->
+                    <div class="mt-4">
+                        <h3 class="font-semibold">Size:</h3>
+                        <div class="flex gap-4 mt-2">
+                            <button class="px-4 py-2 rounded-lg border hover:bg-gray-200 transition">S</button>
+                            <button class="bg-black text-white px-4 py-2 rounded-lg border hover:bg-gray-800 transition">M</button>
+                            <button class="px-4 py-2 rounded-lg border hover:bg-gray-200 transition">L</button>
+                            <button class="px-4 py-2 rounded-lg border hover:bg-gray-200 transition">XL</button>
+                        </div>
+                    </div>
+                    
+                    <!-- ============================================= -->
+                    <!-- SECTION PAIEMENT - DEUX OPTIONS SIMPLES        -->
+                    <!-- ============================================= -->
+                    
+                    <!-- Message informatif -->
+                    <div class="mt-6 bg-blue-50 p-4 rounded-lg border border-blue-200 mb-4">
+                        <p class="text-sm text-blue-800 flex items-center gap-2">
+                            <i class="fas fa-shield-alt text-blue-600"></i>
+                            <strong>Paiement 100% sécurisé</strong> - Choisissez votre méthode préférée
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                        <!-- OPTION 1: PAYPAL (bouton simple) -->
+                        <!-- 
+                            =============================================
+                            PAYPAL - MODE D'EMPLOI :
+                            1. Remplacez "votre-email-paypal@exemple.com" par VOTRE adresse email PayPal
+                            2. Le client paie 122$ USD et vous recevez l'argent directement
+                            3. Le paiement s'ouvre dans un nouvel onglet
+                            =============================================
+                        -->
+                        <div class="payment-option rounded-lg p-4 bg-white">
+                            <div class="flex items-center gap-2 mb-3">
+                                <i class="fab fa-paypal text-2xl text-blue-700"></i>
+                                <span class="font-semibold">PayPal</span>
+                                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">+ carte bancaire</span>
+                            </div>
+                            
+                            <form target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                                <!-- ⚠️ À MODIFIER : mettez votre email PayPal ici -->
+                                <input type="hidden" name="business" value="keniesther06@gmail.com">
+                                
+                                <!-- Configuration technique -->
+                                <input type="hidden" name="cmd" value="_xclick">
+                                <input type="hidden" name="item_name" value="Boa Fleece Jacket - Jolt">
+                                <input type="hidden" name="amount" value="122.00">
+                                <input type="hidden" name="currency_code" value="USD">
+                                <input type="hidden" name="no_shipping" value="1">
+                                
+                                <!-- Pages de retour (optionnel) -->
+                                <input type="hidden" name="return" value="https://votresite.com/merci.html">
+                                <input type="hidden" name="cancel_return" value="https://votresite.com/annulation.html">
+                                
+                                <button type="submit" class="paypal-button w-full text-white py-3 px-4 rounded-lg font-semibold flex items-center justify-center gap-2">
+                                    <i class="fab fa-paypal text-xl"></i>
+                                    Payer avec PayPal
+                                </button>
+                            </form>
+                            <p class="text-xs text-gray-500 mt-2">Compte PayPal ou carte bancaire acceptés</p>
+                        </div>
+                        
+                        <!-- OPTION 2: STRIPE (paiement par carte sans quitter le site) -->
+                        <!-- 
+                            =============================================
+                            STRIPE - MODE D'EMPLOI :
+                            1. Créez un compte gratuit sur stripe.com
+                            2. Dans votre tableau de bord Stripe, récupérez votre "Publishable Key"
+                            3. Remplacez "pk_test_VOTRE_CLE_STRIPE" par votre vraie clé
+                            4. Optionnel : remplacez "https://votre-site.com/succes" par votre page de remerciement
+                            
+                            AVANTAGE : Le client paie sans quitter votre site (fenêtre pop-up)
+                            =============================================
+                        -->
+                        <div class="payment-option rounded-lg p-4 bg-white">
+                            <div class="flex items-center gap-2 mb-3">
+                                <i class="fab fa-cc-visa text-2xl text-blue-600"></i>
+                                <i class="fab fa-cc-mastercard text-2xl text-orange-600"></i>
+                                <span class="font-semibold ml-1">Carte bancaire</span>
+                                <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full">Stripe</span>
+                            </div>
+                            
+                            <!-- Bouton Stripe (nécessite JavaScript) -->
+                            <button id="stripe-button" class="stripe-button w-full text-white py-3 px-4 rounded-lg font-semibold flex items-center justify-center gap-2">
+                                <i class="fas fa-credit-card text-xl"></i>
+                                Payer par carte
+                            </button>
+                            
+                            <!-- Message d'information pour la configuration -->
+                            <!-- <div id="stripe-config-warning" class="text-xs text-amber-600 bg-amber-50 p-2 rounded mt-2 border border-amber-200">
+                                <i class="fas fa-info-circle"></i>
+                                ⚠️ Configuration requise : remplacez "pk_test_VOTRE_CLE_STRIPE" par votre vraie clé Stripe
+                            </div> -->
+                            
+                            <p class="text-xs text-gray-500 mt-2">Visa, Mastercard, American Express</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Message de garantie -->
+                    <p class="text-sm text-gray-500 mt-4 w-full flex items-center gap-2 bg-gray-50 p-3 rounded-lg">
+                        <i class="fas fa-lock text-green-600"></i> 
+                        Transactions sécurisées par PayPal et Stripe. Vos coordonnées bancaires ne sont jamais stockées sur notre site.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SECTION "COMPLÉTEZ VOTRE LOOK" -->
+            <section class="mt-12">
+                <h3 class="text-2xl font-semibold mb-4">This item can be cool with this</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <!-- Produit 1 -->
+                    <div class="text-center relative bg-white p-3 rounded-lg shadow">
+                        <button class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <img src="Casquette Smiley - Blanc _ Unique.jpeg" class="w-full h-48 object-contain rounded-lg mb-2" alt="Casquette Smiley" />
+                        <p class="font-semibold">Adidas x Jolt</p>
+                        <p class="text-gray-600 font-bold">$49.00</p>
+                    </div>
+                    
+                    <!-- Produit 2 -->
+                    <div class="text-center relative bg-white p-3 rounded-lg shadow">
+                        <button class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <img src="Casquette Smiley - Blanc _ Unique.jpeg" class="w-full h-48 object-contain rounded-lg mb-2" alt="Casquette Smiley" />
+                        <p class="font-semibold">P.S Cap</p>
+                        <p class="text-gray-600 font-bold">$49.00</p>
+                    </div>
+                    
+                    <!-- Produit 3 -->
+                    <div class="text-center relative bg-white p-3 rounded-lg shadow">
+                        <button class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <img src="Casquette Smiley - Blanc _ Unique.jpeg" class="w-full h-48 object-contain rounded-lg mb-2" alt="Casquette Smiley" />
+                        <p class="font-semibold">OG Beanie</p>
+                        <p class="text-gray-600 font-bold">$20.00</p>
+                    </div>
+                    
+                    <!-- Produit 4 -->
+                    <div class="text-center relative bg-white p-3 rounded-lg shadow">
+                        <button class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <img src="Casquette Smiley - Blanc _ Unique.jpeg" class="w-full h-48 object-contain rounded-lg mb-2" alt="Casquette Smiley" />
+                        <p class="font-semibold">Adidas X Jolt</p>
+                        <p class="text-gray-600 font-bold">$49.00</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="bg-black text-white py-8">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="flex flex-wrap justify-between">
+                    <div class="mb-6">
+                        <h2 class="text-3xl font-bold">Jolt</h2>
+                        <p class="mt-2 text-gray-400">Experience the Great Outdoors in <br> Style with Jolt's. Shop now and <br> gear up for adventure in jolt</p>
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold">Categories</h3>
+                        <ul class="mt-2 space-y-1 text-gray-400">
+                            <li><a href="#" class="hover:underline">Jackets</a></li>
+                            <li><a href="#" class="hover:underline">Shirts</a></li>
+                            <li><a href="#" class="hover:underline">Knit</a></li>
+                            <li><a href="#" class="hover:underline">T-shirts</a></li>
+                            <li><a href="#" class="hover:underline">Bottoms</a></li>
+                            <li><a href="#" class="hover:underline">Accessories</a></li>
+                        </ul>
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold">Customer Care</h3>
+                        <ul class="mt-2 space-y-1 text-gray-400">
+                            <li><a href="#" class="hover:underline">FAQ</a></li>
+                            <li><a href="#" class="hover:underline">Shipping</a></li>
+                            <li><a href="#" class="hover:underline">Order Status</a></li>
+                            <li><a href="#" class="hover:underline">Return & Exchange</a></li>
+                        </ul>
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold">Company</h3>
+                        <ul class="mt-2 space-y-1 text-gray-400">
+                            <li><a href="#" class="hover:underline">Privacy</a></li>
+                            <li><a href="#" class="hover:underline">Guides</a></li>
+                            <li><a href="#" class="hover:underline">Terms of Conditions</a></li>
+                        </ul>
+                    </div>
+                    <div class="flex mb-6 space-x-4">
+                        <a href="#" class="hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center mt-8 border-t border-gray-700 pt-4 text-sm text-gray-400">
+                    <p>© 2023 Jolt Studio, Inc - All Rights Reserved</p>
+                    <div>
+                        Call Us On: +12 332476 |
+                        <a href="#" class="hover:underline">Send Email</a> |
+                        USD $ | English
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- SCRIPT POUR LE CHANGEMENT D'IMAGE ET STRIPE -->
+    <script src="script.js">
+   
+    </script>
+</body>
+</html>
